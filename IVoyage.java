@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public interface IVoyage {
 
-	String whoTheMost();
+	String whoTheMost(ArrayList<Deputy> deputies);
 	
-	String whoTheLong();
+	String whoTheLong(ArrayList<Deputy> deputies);
 	
-	String whichWasTheMostExpensive();
+	String whichWasTheMostExpensive(ArrayList<Deputy> deputies);
 	
-	ArrayList<String> whoVisitItaly();	
+	ArrayList<String> whoVisitItaly(ArrayList<Deputy> deputies);	
 }

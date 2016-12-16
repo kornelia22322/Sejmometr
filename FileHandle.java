@@ -16,7 +16,7 @@ public class FileHandle{
 	
 	public void connectJson() throws JsonIOException, JsonSyntaxException, IOException
 	{
-		    String sURL = "https://api-v3.mojepanstwo.pl/dane/poslowie.json"; 
+		    String sURL = "https://api-v3.mojepanstwo.pl/dane/poslowie/1131.json"; 
 
 		    // Connect to the URL using java's native library
 		    URL url = new URL(sURL);
@@ -27,9 +27,14 @@ public class FileHandle{
 		    JsonParser jp = new JsonParser(); //from gson
 		    JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
 		    JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object. 
-		    String sth = rootobj.get("slug").getAsString(); 
+		    String sth = rootobj.get("id").getAsString(); 
 		    System.out.println(sth);
 	}
 	
 	
+	public static void main(String[] args) throws JsonIOException, JsonSyntaxException, IOException
+	{
+		FileHandle som=new FileHandle();
+		som.connectJson();
+	}
 }
