@@ -1,14 +1,14 @@
 package com.json;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 public interface IVoyage {
 
-	String whoTheMost(ArrayList<Deputy> deputies);
+	void whoTheMost() throws IOException;
 	
-	String whoTheLong(ArrayList<Deputy> deputies);
+	void whoTheLong() throws IOException;
 	
-	String whichWasTheMostExpensive(ArrayList<Deputy> deputies);
+	void whichWasTheMostExpensive() throws IOException;
 	
-	ArrayList<String> whoVisitItaly(ArrayList<Deputy> deputies);	
+	void whoVisitItaly() throws IOException;	
 }

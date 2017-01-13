@@ -1,40 +1,59 @@
 package com.json;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
+import java.text.ParseException;
+import java.util.concurrent.TimeUnit;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonSyntaxException;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
-public class FileHandle{
-	
-	public void connectJson() throws JsonIOException, JsonSyntaxException, IOException
-	{
-		    String sURL = "https://api-v3.mojepanstwo.pl/dane/poslowie/1131.json"; 
+public class FileHandle {
 
-		    // Connect to the URL using java's native library
-		    URL url = new URL(sURL);
-		    HttpURLConnection request = (HttpURLConnection) url.openConnection();
-		    request.connect();
+	public static OkHttpClient client;
 
-		    // Convert to a JSON object to print data
-		    JsonParser jp = new JsonParser(); //from gson
-		    JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
-		    JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object. 
-		    String sth = rootobj.get("id").getAsString(); 
-		    System.out.println(sth);
+	String run(String url) throws IOException {
+
+		try {
+			client = new OkHttpClient();
+
+			client = new OkHttpClient.Builder().connectTimeout(20, TimeUnit.SECONDS).writeTimeout(20, TimeUnit.SECONDS)
+					.readTimeout(30, TimeUnit.SECONDS).build();
+
+			Request request = new Request.Builder().url(url).build();
+
+			Response response = client.newCall(request).execute();
+			return response.body().string();
+
+		} catch (SocketTimeoutException|UnknownHostException exception) {
+			System.out.println("Przekroczono limit czasu po³¹czenia!");
+			System.exit(0);
+			return null;
+		}
+
 	}
-	
-	
-	public static void main(String[] args) throws JsonIOException, JsonSyntaxException, IOException
-	{
-		FileHandle som=new FileHandle();
-		som.connectJson();
+
+	public static void main(String[] args) throws IOException, ParseException, IllegalArgument, NoSuchaDeputy {
+
+		/*
+		 Opracuj system, który na podstawie argumentów linii poleceñ wyœwietla
+		 nastêpuj¹ce informacje (dla okreœlonej kadencji sejmu): 
+		 S - suma wydatków pos³a/pos³anki o okreœlonym imieniu i nazwisku 
+		 W - wysokoœci wydatków na 'drobne naprawy i remonty biura poselskiego' okreœlonego pos³a/pos³anki
+		 SR - œredniej wartoœci sumy wydatków wszystkich pos³ów 
+		 NP - pos³a/pos³anki, który wykona³ najwiêcej podró¿y zagranicznych
+		 NG - pos³a/pos³anki, który najd³u¿ej przebywa³ za granic¹ 
+		 NPZ - pos³a/pos³anki, który odby³ najdro¿sz¹ podró¿ zagraniczn¹ 
+		 L - listê wszystkich pos³ów, którzy odwiedzili W³ochy
+		 */
+		
+		  ArgumentsChecker arg=new ArgumentsChecker(args);	
+		  arg.convert();
+
+		    
+
 	}
+
 }
