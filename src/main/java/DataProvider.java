@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 //Builder Design Pattern
 public class DataProvider {
-    public ArrayList<JSONObject> jsonObjects;
+    private ArrayList<JSONObject> jsonObjects;
 
     private DataProvider(Builder builder) {
         jsonObjects = builder.jsonObjects;
@@ -18,7 +18,7 @@ public class DataProvider {
     }
 
     public static class Builder {
-        public ArrayList<JSONObject> jsonObjects;
+        private ArrayList<JSONObject> jsonObjects;
         private static final String URL = "https://api-v3.mojepanstwo.pl/dane/poslowie.json?conditions[poslowie.kadencja]=8";
 
         private static JSONObject readJsonFromAPI(String url) throws IOException, JSONException {

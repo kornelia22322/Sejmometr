@@ -1,6 +1,7 @@
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,7 +10,7 @@ public class Main {
         Thread[] threads = new Thread[arrayList.size()];
 
         for(int i = 0; i < arrayList.size(); i++) {
-            threads[i] = new Thread(new SingleSearchThread(arrayList.get(i), "Jarosław Kaczyński"));
+            threads[i] = new Thread(new MapJsonToObjectThread(arrayList.get(i), i));
         }
 
         for(int i = 0; i < arrayList.size(); i++) {
@@ -24,6 +25,16 @@ public class Main {
             }
         }
 
-        System.out.println(SingleSearchThread.getDeputy().getName());
+        List<Deputy> list = MapJsonToObjectThread.getSyncList();
+        int i = 0;
+
+        for(Deputy deputy : list) {
+            if(deputy.getName().length() < 1) {
+                list.remove(deputy);
+            }
+        }
+
+        System.out.println(list.size());
+
     }
 }
