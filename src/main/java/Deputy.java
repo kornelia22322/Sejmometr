@@ -5,7 +5,7 @@ public class Deputy {
     private String name;
     private int area;
     private int interpolation_count;
-    private int attendance;
+    private double attendance;
     private String club;
     private int flight_count;
     private int id;
@@ -17,6 +17,7 @@ public class Deputy {
         attendance = builder.attendance;
         club = builder.club;
         flight_count = builder.flight_count;
+        id = builder.id;
     }
 
     public static class Builder {
@@ -24,7 +25,7 @@ public class Deputy {
         private String name;
         private int area;
         private int interpolation_count;
-        private int attendance;
+        private double attendance;
         private String club;
         private int flight_count;
         private int id;
@@ -44,7 +45,7 @@ public class Deputy {
             return this;
         }
 
-        public Builder setAttendance(int attendance) {
+        public Builder setAttendance(double attendance) {
             this.attendance = attendance;
             return this;
         }
@@ -59,7 +60,7 @@ public class Deputy {
             return this;
         }
 
-        public Builder setid(int id) {
+        public Builder setId(int id) {
             this.id = id;
             return this;
         }
@@ -81,7 +82,7 @@ public class Deputy {
         return interpolation_count;
     }
 
-    public int getAttendance() {
+    public double getAttendance() {
         return attendance;
     }
 

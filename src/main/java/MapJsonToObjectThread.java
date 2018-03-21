@@ -26,13 +26,15 @@ public class MapJsonToObjectThread implements Runnable{
             int id = jsonObject.getJSONArray("Dataobject")
                     .getJSONObject(i)
                     .getInt("id");
-            Deputy deputy = new Deputy.Builder().setid(id)
+
+            Deputy deputy = new Deputy.Builder()
                     .setName(deputyData.getString("ludzie.nazwa"))
                     .setArea(deputyData.getInt("poslowie.okreg_wyborczy_numer"))
-                    .setAttendance(deputyData.getInt("poslowie.frekwencja"))
+                    .setAttendance(deputyData.getDouble("poslowie.frekwencja"))
                     .setClub(deputyData.getString("sejm_kluby.nazwa"))
                     .setInterpolation_count(deputyData.getInt("poslowie.liczba_interpelacji"))
                     .setFlight_count(deputyData.getInt("poslowie.liczba_przelotow"))
+                    .setId(id)
                     .build();
             syncList.add(deputy);
 

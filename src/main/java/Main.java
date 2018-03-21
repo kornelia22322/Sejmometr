@@ -40,7 +40,7 @@ public class Main {
 
         list.stream()
                 .sorted(new CompareByAttendance())
-                .forEach(item -> System.out.println(item.getAttendance()));
+                .forEach(item -> System.out.println(item.getName() + " " + item.getId()));
 
     }
 }
