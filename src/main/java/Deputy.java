@@ -1,3 +1,4 @@
+import java.util.Comparator;
 
 //Builder Design Pattern
 public class Deputy {
@@ -95,4 +96,5 @@ public class Deputy {
     public int getId() {
         return id;
     }
+
 }

@@ -1,6 +1,8 @@
 import org.json.JSONObject;
+import sun.rmi.server.Activation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -10,7 +12,7 @@ public class Main {
         Thread[] threads = new Thread[arrayList.size()];
 
         for(int i = 0; i < arrayList.size(); i++) {
-            threads[i] = new Thread(new MapJsonToObjectThread(arrayList.get(i), i));
+            threads[i] = new Thread(new MapJsonToObjectThread(arrayList.get(i)));
         }
 
         for(int i = 0; i < arrayList.size(); i++) {
@@ -34,7 +36,11 @@ public class Main {
             }
         }
 
-        System.out.println(list.size());
+        Collections.sort(list, new CompareByAttendance());
+
+        list.stream()
+                .sorted(new CompareByAttendance())
+                .forEach(item -> System.out.println(item.getAttendance()));
 
     }
 }
