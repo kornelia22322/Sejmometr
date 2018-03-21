@@ -34,6 +34,9 @@ public class MapJsonToObjectThread implements Runnable{
                     .setClub(deputyData.getString("sejm_kluby.nazwa"))
                     .setInterpolation_count(deputyData.getInt("poslowie.liczba_interpelacji"))
                     .setFlight_count(deputyData.getInt("poslowie.liczba_przelotow"))
+                    .setTown(deputyData.getString("poslowie.miejsce_zamieszkania"))
+                    .setVoting_area(deputyData.getString("poslowie.okreg_gminy_str"))
+                    .setBirthdate(deputyData.getString("poslowie.data_urodzenia"))
                     .setId(id)
                     .build();
             syncList.add(deputy);

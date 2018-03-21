@@ -1,4 +1,8 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
+import java.util.Date;
 
 //Builder Design Pattern
 public class Deputy {
@@ -9,6 +13,9 @@ public class Deputy {
     private String club;
     private int flight_count;
     private int id;
+    private String town;
+    private String voting_area;
+    private Date birthdate;
 
     private Deputy(Builder builder) {
         name = builder.name;
@@ -18,6 +25,9 @@ public class Deputy {
         club = builder.club;
         flight_count = builder.flight_count;
         id = builder.id;
+        town = builder.town;
+        voting_area = builder.voting_area;
+        birthdate = builder.birthdate;
     }
 
     public static class Builder {
@@ -29,6 +39,9 @@ public class Deputy {
         private String club;
         private int flight_count;
         private int id;
+        private String town;
+        private String voting_area;
+        private Date birthdate;
 
         public Builder setName(String name) {
             this.name = name;
@@ -65,6 +78,33 @@ public class Deputy {
             return this;
         }
 
+        public Builder setTown(String town) {
+            this.town = town;
+            return this;
+        }
+
+        public Builder setVoting_area(String voting_area) {
+            this.voting_area = voting_area;
+            return this;
+        }
+
+        public Builder setBirthdate(String birthdate) {
+            Date date;
+            try {
+                date = convertStringToDate(birthdate);
+                this.birthdate = date;
+            } catch (ParseException e) {
+                System.out.println("Given birtdate in wrong format.");
+            }
+            return this;
+        }
+
+        private Date convertStringToDate(String stringDate) throws ParseException {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = (Date) dateFormat.parse(stringDate);
+            return date;
+        }
+
         public Deputy build() {
             return new Deputy(this);
         }
@@ -98,4 +138,13 @@ public class Deputy {
         return id;
     }
 
+    public String getTown() { return town; }
+
+    public String getVoting_area() {
+        return voting_area;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
 }
