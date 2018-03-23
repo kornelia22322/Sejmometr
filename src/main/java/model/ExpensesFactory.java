@@ -1,3 +1,5 @@
+package model;
+
 public class ExpensesFactory {
 
     public static IExpenses chooseExpenses(String name) {

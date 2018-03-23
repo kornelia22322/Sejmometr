@@ -1,3 +1,5 @@
+package model;
+
 public class SumExpenses implements IExpenses {
 
     private Deputy deputy;

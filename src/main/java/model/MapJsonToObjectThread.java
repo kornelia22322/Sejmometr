@@ -1,3 +1,5 @@
+package model;
+
 import org.json.JSONObject;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
