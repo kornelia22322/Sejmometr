@@ -12,6 +12,7 @@ const fadeAnimation = {
     transitionLeaveTimeout: 500
 }
 
+const URL_DEPUTIES = 'http://localhost:8080/';
 
 class ListofDeputies extends Component {
 
@@ -22,6 +23,15 @@ class ListofDeputies extends Component {
             filtered: [],
             keyword: ''
         }
+    }
+
+    componentDidMount() {
+        fetch(`${URL_DEPUTIES}`)
+        .then(response => response.json())
+        .then(json => {
+            this.setState({data: json})
+            console.log(json);
+        })
     }
 
     searchDeputy = (event) => {

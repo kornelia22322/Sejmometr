@@ -7,6 +7,7 @@ import model.DataProvider;
 import model.Deputy;
 import model.ThreadExecutor;
 import org.json.JSONObject;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,13 +18,14 @@ import java.util.Map;
 
 @RestController
 public class HomeController {
-
+    @CrossOrigin
     @RequestMapping("/")
     @JsonView(views.Views.HomeView.class)
     public List<Deputy> getDeputiesList() {
         ArrayList<JSONObject> arrayList = new DataProvider.Builder().build().getJsonObjects();
         ThreadExecutor threadExecutor = new ThreadExecutor(arrayList);
         List<Deputy> deputyLinkedList = ThreadExecutor.getListOfDeputies();
+        System.out.println(deputyLinkedList.size());
         return deputyLinkedList;
     }
 }
