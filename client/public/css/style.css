@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: #1b1b1b;
+    font-family: 'Amatic SC', cursive;
+}
+
+body {
+    background-color: #FEF6EB;
+}
+
+/* Header & Fotter */
+
+header {
+    border-bottom: 1px solid #525564;
+}
+
+header, footer {
+    background: #fff;
+    padding: 20px 0;
+    background-color: #74828F;
+}
+
+.header-container {
+    text-align: center;
+}
+
+h1 {
+    color: #FEF6EB;
+    font-size: 40px;
+}
+
+.search_component {
+    text-align: center;
+}
+
+.search_component input {
+    border-radius: 30px;
+    border: 1px solid #dddddd;
+    text-align: center;
+    font-size: 24px;
+    padding: 15px;
+    margin: 30px 0;
+    font-weight: bold;
+}
+
+.search_component input:focus {
+    outline-width: 0;
+}
