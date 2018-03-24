@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 
-import Header from './header'
+import Header from './Header'
 import ListofDeputies from './ListofDeputies'
 
 class App extends Component {

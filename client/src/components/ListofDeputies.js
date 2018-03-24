@@ -2,15 +2,7 @@ import React, {Component} from 'react'
 import {CSSTransitionGroup} from 'react-transition-group'
 import {Link} from 'react-router-dom'
 
-const fadeAnimation = {
-    transitionName: 'fade',
-    transitionAppear: true,
-    transitionAppearTimeout: 500,
-    transitionEnter: true,
-    transitionEnterTimeout: 500,
-    transitionLeave: true,
-    transitionLeaveTimeout: 500
-}
+
 
 const URL_DEPUTIES = 'http://localhost:8080/';
 
@@ -29,7 +21,11 @@ class ListofDeputies extends Component {
         fetch(`${URL_DEPUTIES}`)
         .then(response => response.json())
         .then(json => {
-            this.setState({data: json})
+            this.setState({
+                deputies: json,
+                filtered: json
+            })
+            console.log(json.length);
             console.log(json);
         })
     }
@@ -58,8 +54,9 @@ class ListofDeputies extends Component {
         console.log(filtered);
         return filtered.map((item) => {
             return (
-                <div class="single_deputy">
-                    <Link to={`/deputy/${item.id}`} key={item.id} className="deputy_item">
+                <div className="single_deputy" key={item.id}>
+                    <Link to={`/deputy/${item.id}`} className="deputy_item" style={{ textDecoration: 'none' }}>
+                    <p>{item.name}</p>
                     </Link>
                 </div>
             )
@@ -71,12 +68,10 @@ class ListofDeputies extends Component {
             <div className="deputies_component">
                 <div className="search_component">
                     <input type="text" placeholder="Wyszukaj posła.."
-                    onChange={(e) => this.searchTeam(e)}/>
+                    onChange={(e) => this.searchDeputy(e)}/>
                 </div>
                 <div className="deputies_container">
-                    <CSSTransitionGroup {...fadeAnimation}>
-                        {this.renderList(this.state)}
-                    </CSSTransitionGroup>
+                    {this.renderList(this.state)}
                 </div>
             </div>
         )

@@ -47,3 +47,12 @@ h1 {
 .search_component input:focus {
     outline-width: 0;
 }
+
+.deputy_item p {
+    font-family: 'Arima Madurai', cursive;
+    font-size: 24px;
+}
+
+.single_deputy {
+    text-align: center;
+}
