@@ -66,7 +66,6 @@ class ListofDeputies extends Component {
 
 
     renderList = ({filtered, filteredClub}) => {
-        console.log(filteredClub);
         return filtered.map((item) => {
             if(this.isButtonHighlighted(item.club)) {
                 return (

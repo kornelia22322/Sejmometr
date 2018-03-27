@@ -13,6 +13,8 @@ const clubMapping = {
     "Wolni i Solidarni" : "WiS"
 }
 
+const clickedButtonColor = "#FF8362"
+
 class DeputiesWrapper extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +23,6 @@ class DeputiesWrapper extends Component {
             clickedclubs : new Array(7).fill(null),
             clickedAny : false
         }
-        console.log(this.state.clubs);
     }
 
     convertToArr = (clubMapping) => {
@@ -34,25 +35,36 @@ class DeputiesWrapper extends Component {
         return arr;
     }
 
-    handleClick = (index) => {
+    handleClick = (index, e) => {
         if(this.state.clickedclubs[index] == null) {
-            console.log(this.state.clickedclubs.slice(0, index));
-            console.log(this.state.clubs[index]);
-            console.log(this.state.clickedclubs.slice(index+1, this.state.clickedclubs.length));
+            e.target.style.backgroundColor = clickedButtonColor;
             this.setState ({
                 clickedclubs : [...this.state.clickedclubs.slice(0, index), this.state.clubs[index],  ...this.state.clickedclubs.slice(index+1, this.state.clickedclubs.length)],
                 clickedAny : true
             })
         } else {
+            e.target.style.backgroundColor = null;
             this.setState ({
-                clickedclubs : [...this.state.clickedclubs.slice(0, index), null, ...this.state.clickedclubs.slice(index+1, this.state.clickedclubs.length)],
+                clickedclubs : [...this.state.clickedclubs.slice(0, index), null, ...this.state.clickedclubs.slice(index+1, this.state.clickedclubs.length)]
+            }, () => { this.setState({
                 clickedAny : this.checkifAnyClicked(this.state.clickedclubs)
+            }), () => { this.resetStatetoInitial(this.state.clickedAny)}
+            })
+        }
+    }
+
+    resetStatetoInitial = (clickedAny) => {
+        if(!clickedAny) {
+            this.setState ({
+                clickedclubs : this.state.clubs
             })
         }
     }
 
     checkifAnyClicked = (clickedclubs) => {
-        return (clickedclubs.includes(true));
+        return clickedclubs.some(function (el) {
+            return el !== null;
+        });
     }
 
     determine = () => {
@@ -63,7 +75,7 @@ class DeputiesWrapper extends Component {
         return(
             <div id = "wrapper">
                 <ClubChoice clubMapping = {clubMapping} clubs = {this.state.clubs} onClick = {this.handleClick}/>
-                <ListofDeputies clubMapping = {clubMapping} clubs = {this.state.clickedclubs}/>
+                <ListofDeputies clubMapping = {clubMapping} clubs = {this.state.clickedAny ? this.state.clickedclubs : this.state.clubs}/>
             </div>
         )
     }

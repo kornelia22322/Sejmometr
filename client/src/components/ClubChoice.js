@@ -8,7 +8,7 @@ class ClubChoice extends Component {
     iteratethroughClubs = (clubs) => {
         return clubs.map((club, index) => {
             return (
-                <button type = "button" className = "club-button" onClick = {() => {this.props.onClick(index)}}>
+                <button type = "button" className = "club-button" id={index} onClick = {(e) => {this.props.onClick(index, e)}}>
                     {club}
                 </button>
             )
