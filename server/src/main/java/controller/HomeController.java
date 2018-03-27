@@ -25,7 +25,6 @@ public class HomeController {
         ArrayList<JSONObject> arrayList = new DataProvider.Builder().build().getJsonObjects();
         ThreadExecutor threadExecutor = new ThreadExecutor(arrayList);
         List<Deputy> deputyLinkedList = ThreadExecutor.getListOfDeputies();
-        System.out.println(deputyLinkedList.size());
         return deputyLinkedList;
     }
 }

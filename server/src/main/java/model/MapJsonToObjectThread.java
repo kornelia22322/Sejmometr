@@ -28,21 +28,21 @@ public class MapJsonToObjectThread implements Runnable{
             int id = jsonObject.getJSONArray("Dataobject")
                     .getJSONObject(i)
                     .getInt("id");
-
-            Deputy deputy = new Deputy.Builder()
-                    .setName(deputyData.getString("ludzie.nazwa"))
-                    .setArea(deputyData.getInt("poslowie.okreg_wyborczy_numer"))
-                    .setAttendance(deputyData.getDouble("poslowie.frekwencja"))
-                    .setClub(deputyData.getString("sejm_kluby.nazwa"))
-                    .setInterpolation_count(deputyData.getInt("poslowie.liczba_interpelacji"))
-                    .setFlight_count(deputyData.getInt("poslowie.liczba_przelotow"))
-                    .setTown(deputyData.getString("poslowie.miejsce_zamieszkania"))
-                    .setVoting_area(deputyData.getString("poslowie.okreg_gminy_str"))
-                    .setBirthdate(deputyData.getString("poslowie.data_urodzenia"))
-                    .setId(id)
-                    .build();
-            syncList.add(deputy);
-
+            if(deputyData.getString("ludzie.nazwa").length() > 2) {
+                Deputy deputy = new Deputy.Builder()
+                        .setName(deputyData.getString("ludzie.nazwa"))
+                        .setArea(deputyData.getInt("poslowie.okreg_wyborczy_numer"))
+                        .setAttendance(deputyData.getDouble("poslowie.frekwencja"))
+                        .setClub(deputyData.getString("sejm_kluby.nazwa"))
+                        .setInterpolation_count(deputyData.getInt("poslowie.liczba_interpelacji"))
+                        .setFlight_count(deputyData.getInt("poslowie.liczba_przelotow"))
+                        .setTown(deputyData.getString("poslowie.miejsce_zamieszkania"))
+                        .setVoting_area(deputyData.getString("poslowie.okreg_gminy_str"))
+                        .setBirthdate(deputyData.getString("poslowie.data_urodzenia"))
+                        .setId(id)
+                        .build();
+                syncList.add(deputy);
+            }
         }
     }
 }

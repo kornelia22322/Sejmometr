@@ -11,14 +11,17 @@ public class ThreadExecutor {
 
     public ThreadExecutor(ArrayList<JSONObject> deputies) {
         executeThreads(deputies);
-        listOfDeputies = (List<Deputy>) MapJsonToObjectThread.getSyncList();
+        listOfDeputies = MapJsonToObjectThread.getSyncList();
     }
 
     public static List<Deputy> getListOfDeputies() {
         return listOfDeputies;
     }
 
+
     private void executeThreads(ArrayList<JSONObject> arrayList) {
+        if(listOfDeputies.size() > 0) return;
+
         Thread[] threads = new Thread[arrayList.size()];
 
         for(int i = 0; i < arrayList.size(); i++) {

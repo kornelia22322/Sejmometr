@@ -17,6 +17,8 @@ public class Deputy {
     private int area;
     private int interpolation_count;
     private double attendance;
+
+    @JsonView(views.Views.HomeView.class)
     private String club;
     private int flight_count;
 
